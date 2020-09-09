@@ -9,7 +9,7 @@ export default {
     currOrder: null
   },
   mutations: {
-     set_orders(state, payload) {
+     orders(state, payload) {
       state.orders.push(payload)
     },
     currentOrder(state, payload){
@@ -21,17 +21,13 @@ export default {
     currOrder({ commit }, payload) {
       commit('currOrder', payload)
   },
-    orders({ commit, dispatch}) {
-       commit('clearError');
-      commit('setLoading', true);
+    orders({ commit}) {
       axios
         .get('http://127.0.0.1:8000/orders/')
         .then((response) => {
           let data = response.data;
-          dispatch('set_orders', data);
-
-          commit('set_orders', data);
-          commit('setLoading', false)
+          commit('orders', data);
+          console.log('orders', data);
         })
     }
   },

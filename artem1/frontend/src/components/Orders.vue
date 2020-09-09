@@ -49,14 +49,17 @@
             currentOrder: {},
           };
       },
-      async created() {
-        await this.fetchOrders();
+     // computed: {
+       //  orders(){
+       //    return this.$store.getters.orders
+         //}
+      //},
+      created(){
+          this.fetchOrder()
       },
       methods: {
-          async fetchOrders() {
-             const response = await fetch('http://127.0.0.1:8000/orders/')
-            this.orders = await response.json()
-          },
+          fetchOrder(){
+          this.$store.dispatch({type:'orders'})},
         async removeOrder(order) {
             let token = localStorage.getItem('auth_token');
             const { id } = order;

@@ -20,8 +20,8 @@ class Order(models.Model):
     amount_wanted = models.IntegerField("Было заказано")
     amount_actual = models.IntegerField("Количество")
     cost = models.FloatField("Цена за штуку")
-    pre_cost = models.FloatField("Предоплата", default='')
-    status = models.ForeignKey(Status,on_delete=models.CASCADE)
+    pre_cost = models.FloatField("Предоплата", default='24')
+    status = models.ForeignKey(Status, on_delete=models.CASCADE)
     description = models.TextField("Описание")
 
     def __str__(self):
