@@ -9,34 +9,38 @@ export default {
     currOrder: null
   },
   mutations: {
-     SET_ORDERS(state, orders) {
-      state.orders = orders;
+     set_orders(state, payload) {
+      state.orders.push(payload)
     },
-    EDIT_ORDER(state, order) {
-      let v = state.orders.find(v => v.id === order.id);
-      v = order;
+    currentOrder(state, payload){
+       state.currOrder = payload
     },
+
   },
   actions: {
-     async loadAll({commit, dispatch}){
-      let response1 = await fetch('http://127.0.0.1:8000/orders/');
-      let or = await response1.json();
+    currOrder({ commit }, payload) {
+      commit('currOrder', payload)
+  },
+    orders({ commit}) {
 
-      commit('SET_ORDERS', or);
-    },
-    async edit({commit}, order) {
-      let response = await Api().put(`/order/update/$order.id}`, order);
-      let newOrder = await response.json();
-      commit('EDIT_ORDER', newOrder);
-      return newOrder;
-    },
+      axios
+        .get('http://127.0.0.1:8000/orders/')
+        .then((response) => {
+          let data = response.data;
+
+          commit('set_orders', data);
+        })
+    }
+  },
     getters: {
-       order(state){
+       currentOrder(state){
+         console.log('Order is ',state.orders.find(order => order.id === state.currOrder) );
          return state.orders.find(order => order.id === state.currOrder)
        },
-      currentOrder(state){
-         return state.currOrder
+      orders(state){
+         console.log('Orders are', state.orders);
+         return state.orders
       }
     }
-  }}
+  }
 

@@ -54,9 +54,10 @@
     this.$axios
       .get('http://127.0.0.1:8000/status/')
       .then(response => { this.statusData = response; this.updateStatus() })},
+
     methods:{
           updateStatus(){
-                  let data = this.statusData.data
+                  let data = this.statusData.data;
              for (let status of data) {
         this.statuses.push({'text': `${status.status}`, 'value': `${status.id}`})
       }},
@@ -71,15 +72,12 @@
               method: "POST",
               body: JSON.stringify(this.currentOrder)
               });
-            console.log(response.data)
-            alert("Спасибо за заказ!")
             await this.$router.push({name: "Orders"});
             if (response.status !== 201) {
               alert(JSON.stringify(await response.json(), null, 2));
             }
 
-
-    }
+    },
     }}
 </script>
 

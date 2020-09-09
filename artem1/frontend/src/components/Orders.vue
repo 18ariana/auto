@@ -39,6 +39,8 @@
 
 <script>
 
+    import axios from "axios";
+
     export default {
         name: "Orders",
       data () {
@@ -52,8 +54,8 @@
       },
       methods: {
           async fetchOrders() {
-            const response = await fetch('http://127.0.0.1:8000/orders/');
-            this.orders = await response.json();
+             const response = await fetch('http://127.0.0.1:8000/orders/')
+            this.orders = await response.json()
           },
         async removeOrder(order) {
             let token = localStorage.getItem('auth_token');

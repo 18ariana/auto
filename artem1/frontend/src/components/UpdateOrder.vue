@@ -23,20 +23,20 @@
           </thead>
           <tbody>
           <tr>
-              <td>{{ item.number }}</td>
-              <td>{{ item.telephone }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.articul }}</td>
-              <td>{{ item.brand }}</td>
-              <td>{{ item.term }}</td>
-              <td>{{ item.term_wanted }}</td>
-              <td>{{ item["amount_actual"] }}</td>
-              <td>{{ item["amount_wanted"] }}</td>
-              <td>{{ item.status }}</td>
-              <td>{{ item.cost }}</td>
-              <td>{{ item.pre_cost }}</td>
-              <td>{{ item.total_cost }}</td>
-              <td>{{ item.description }}</td>
+              <td>{{ currOrder["number"] }}</td>
+              <td>{{ currOrder.telephone }}</td>
+              <td>{{ currOrder.name }}</td>
+              <td>{{ currOrder.articul }}</td>
+              <td>{{ currOrder.brand }}</td>
+              <td>{{ currOrder.term }}</td>
+              <td>{{ currOrder.term_wanted }}</td>
+              <td>{{currOrder["amount_actual"] }}</td>
+              <td>{{ currOrder["amount_wanted"] }}</td>
+              <td>{{currOrder.status }}</td>
+              <td>{{ currOrder.cost }}</td>
+              <td>{{ currOrder.pre_cost }}</td>
+              <td>{{ currOrder.total_cost }}</td>
+              <td>{{ currOrder.description }}</td>
           </tr>
           </tbody>
         </template>
@@ -53,7 +53,7 @@
       props : ['currOrder'],
       data () {
           return{
-             item: {
+             currentOrder: {
             telephone: '',
             name: '',
             number: '',
@@ -70,13 +70,14 @@
           },
           }
       },
-      computed: {
+    computed: {
         order(){
-          this.item= this.$store.getters.order;
-
+          console.log(this.$store.getters.currentOrder);
+          return this.$store.getters.currentOrder
         }
 
-        }
+        },
+
     }
 </script>
 
